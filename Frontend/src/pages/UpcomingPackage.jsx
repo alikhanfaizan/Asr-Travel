@@ -1,8 +1,11 @@
 import React from 'react'
+import Sorting from '../components/Sorting'
 
 const UpcomingPackage = () => {
   return (
-    <div>UpcomingPackage</div>
+    <div>
+      <Sorting/>
+    </div>
   )
 }
 

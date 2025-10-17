@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import t1 from "../assets/test1.jpg";
 import t2 from "../assets/test2.jpg";
 import t3 from "../assets/test3.jpg";
-import t from "../assets/testimonialbg.jpg"; // Placeholder for the image
 import { ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
@@ -10,23 +9,22 @@ const testimonials = [
     role: "Developer",
     text:
       "Outstanding service and exceptional quality. The team delivered beyond our expectations and provided innovative solutions that transformed our business processes completely.",
-    image: t1, // Placeholder for the image
+    image: t1, 
   },
   {
     name: "Sarah Williams",
     role: "Designer",
     text:
       "A fantastic experience! The creativity and technical expertise provided were exactly what we needed. The team was responsive and easy to collaborate with.",
-    image: t2, // Placeholder for the image
+    image: t2, 
   },
   {
     name: "Sarah Williams",
     role: "Designer",
     text:
       "A fantastic experience! The creativity and technical expertise provided were exactly what we needed. The team was responsive and easy to collaborate with.",
-    image: t3, // Placeholder for the image
+    image: t3, 
   },
-  // Add more testimonials here if needed
 ];
 
 const Testimonial = () => {
@@ -46,7 +44,7 @@ const Testimonial = () => {
 
   return (
     <div className="min-h-screen bg-[url('src/assets/testimonialbg.jpg')]  bg-cover   bg-no-repeat">
-    <div className="py-16 px-40 ">
+    <div className="py-25 px-40 ">
       <div className="max-w-2xl px-15 mx-auto text-center">
         <p className="text-sm font-semibold text-orange-500 uppercase mb-2">
           Promotion
@@ -55,7 +53,7 @@ const Testimonial = () => {
           See What Our Clients Say <br /> About Us
         </h2>
 
-        <div className="relative bg-white rounded-xl shadow-lg py-10 px-6 md:px-10 text-center">
+        <div className="relative bg-white rounded-xl shadow-lg py-15 px-6 md:px-10 text-center">
           {/* Client Image */}
           <div className="flex justify-center -mt-20 mb-4">
             <img

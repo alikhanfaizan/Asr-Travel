@@ -8,8 +8,8 @@ export default function Navbar() {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/destinations", label: "Destinations" },
-    { path: "/contact", label: "Contact" },
+    { path: "/services-landscape", label: "Services" },
+    { path: "/upcoming-package", label: "Upcoming Packages" },
   ];
 
   return (
@@ -22,8 +22,6 @@ export default function Navbar() {
         >
           Travel<span className="text-orange-500 text-3xl -mt-1">↗</span>
         </Link>
-
-        {/* Middle: Nav Links (Desktop) */}
         <div className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <NavLink
@@ -39,15 +37,11 @@ export default function Navbar() {
             </NavLink>
           ))}
         </div>
-
-        {/* Right: Get in Touch Button */}
         <div className="hidden md:block">
           <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-5 rounded-md transition">
             Get In Touch
           </button>
         </div>
-
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-gray-700"
           onClick={() => setIsOpen(!isOpen)}
@@ -56,7 +50,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
           <div className="flex flex-col px-6 py-4 space-y-4">
