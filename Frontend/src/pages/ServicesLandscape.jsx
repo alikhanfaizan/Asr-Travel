@@ -1,8 +1,11 @@
 import React from 'react'
+import Landscpae from '../components/Landscape'
 
 const ServicesLandscape = () => {
   return (
-    <div>ServicesLandscape</div>
+    <div>
+      <Landscpae/>
+    </div>
   )
 }
 

@@ -86,7 +86,7 @@ const Sorting = () => {
   );
 
   return (
-    <>
+    <div className='min-h-screen bg-[#fefefe] px-6 lg:px-40 py-10'>
       {/* Sorting Bar */}
       <div className="bg-gray-100 p-4 flex justify-center space-x-6 rounded-lg mt-6 shadow-sm">
         <button
@@ -229,7 +229,7 @@ const Sorting = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

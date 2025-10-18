@@ -33,7 +33,7 @@ const Logos = () => {
     <div className="overflow-hidden bg-white py-6">
       {/* Wrapper that moves */}
       <div className="flex animate-scroll space-x-10 w-max">
-        {[...logos, ...logos].map((logo, index) => ( // duplicated for seamless loop
+        {[...logos, ...logos].map((logo, index) => ( 
           <img
             key={index}
             src={logo.src}
