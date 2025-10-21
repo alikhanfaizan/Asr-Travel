@@ -1,6 +1,6 @@
 import React from "react";
 import weatherIcon from "../assets/Group 48.png";
-import flightIcon from "../assets/Plane.png";
+import flightIcon from "../assets/plane.png";
 import micIcon from "../assets/Group 50.png";
 import gearIcon from "../assets/Group 49.png";
 
