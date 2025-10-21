@@ -23,10 +23,8 @@ const Promotion = () => {
           {/* Image Section */}
           <div className="w-full lg:w-1/2 flex justify-center items-center">
             {/* Background Image for the image container */}
-            <div
-              className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-cover bg-center rounded-full overflow-hidden border-8 border-white shadow-lg"
-              style={{ backgroundImage: 'url(src/assets/promotionbg.png)' }}
-            >
+            <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-[url('src/assets/promotionbg.png')] bg-cover bg-center rounded-full overflow-hidden border-8 border-white shadow-lg">
+
               <img
                 src="src/assets/circular.jpg"
                 alt="Tour"

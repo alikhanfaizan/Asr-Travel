@@ -7,8 +7,8 @@ const ServicesLandscape = () => {
     
     <div>
       <section
-        className="relative w-full h-[90vh] flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(src/assets/bg1.jpg)` }}
+        className="relative w-full h-[90vh] bg-`url(src/assets/bg1.jpg)` flex items-center justify-center bg-cover bg-center"
+        // style={{ backgroundImage: `url(src/assets/bg1.jpg)` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
 
