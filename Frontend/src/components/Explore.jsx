@@ -25,12 +25,12 @@ const destinations = [
 
 const Explore = () => {
   return (
-    <div className="px-4 sm:px-8 md:px-16 lg:px-50 py-12">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-20 py-12">
       <div className="text-center mb-10">
-        <h2 className="text-2xl sm:text-2xl font-semibold text-orange-500 mb-3">
+        <h2 className="text-xl sm:text-2xl font-semibold text-orange-500 mb-3">
           EXPLORE MORE
         </h2>
-        <h2 className="text-gray-600 text-4xl">Our International Packages</h2>
+        <h2 className="text-3xl sm:text-4xl text-gray-600">Our International Packages</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 rounded-lg">
         {destinations.map((item, index) => (
@@ -43,7 +43,7 @@ const Explore = () => {
             <img
               src={item.img}
               alt={item.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-50 object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 flex justify-between text-white text-sm font-semibold">
               <span>{item.name}</span>
