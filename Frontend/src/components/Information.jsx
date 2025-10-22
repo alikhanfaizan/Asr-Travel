@@ -11,27 +11,30 @@ export default function Information() {
   const galleryImages = [e1, e2, e3, e4, e5, e6];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl mx-auto">
+    <div className="bg-white p-4 sm:p-6 md:p-10 rounded-lg shadow-lg max-w-5xl mx-auto font-sans">
       {/* Title and Rating Section */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold text-[#5660ae] mb-2">Switzerland</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#5660ae]">
+          Switzerland
+        </h2>
+
         <div className="flex items-center">
-          <Star className="text-yellow-400 mr-1" />
-          <Star className="text-yellow-400 mr-1" />
-          <Star className="text-yellow-400 mr-1" />
-          <Star className="text-yellow-400 mr-1" />
-          <Star className="text-yellow-400 mr-1" />
-          <span className="text-sm text-gray-500 ml-2">(5 reviews)</span>
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="text-yellow-400 mr-1 w-4 h-4 sm:w-5 sm:h-5" />
+          ))}
+          <span className="text-xs sm:text-sm text-gray-500 ml-2">
+            (5 reviews)
+          </span>
         </div>
       </div>
 
       {/* Price Section */}
-      <div className="mt-2 text-xl font-bold text-[#D64E36]">
-        <span>$1,000</span> / Per Couple
+      <div className="mt-2 text-lg sm:text-xl md:text-2xl font-bold text-[#D64E36]">
+        <span>$1,000</span> <span className="text-gray-700 text-base">/ Per Couple</span>
       </div>
 
       {/* Description Section */}
-      <p className="text-sm text-gray-600 mt-4">
+      <p className="text-sm sm:text-base md:text-lg text-gray-600 mt-4 leading-relaxed">
         Embark on the journey of a lifetime with our exclusive travel package to
         Switzerland, a country known for its breathtaking landscapes, pristine
         lakes, majestic mountains, and charming villages. This all-inclusive
@@ -58,87 +61,78 @@ export default function Information() {
       </p>
 
       {/* Trip Details Section */}
-      <div className="mt-6">
-        <div className="flex justify-between text-md text-[#5B5B5B]">
-          <span className="text-amber-600 text-md">Destination</span>
-          <span className="font-semibold">Zurich, Switzerland</span>
-        </div>
-
-        <div className="flex justify-between text-md text-[#5B5B5B] mt-2">
-          <span className="text-amber-600">Departure</span>
-          <span className="font-semibold">Main Square New City</span>
-        </div>
-
-        <div className="flex justify-between text-md text-[#5B5B5B] mt-2">
-          <span className="text-amber-600">Departure Time</span>
-          <span className="font-semibold">Approximately 08:10 AM</span>
-        </div>
-
-        <div className="flex justify-between text-md text-[#5B5B5B] mt-2">
-          <span className="text-amber-600">Return Time</span>
-          <span className="font-semibold">Approximately 07:20 PM</span>
-        </div>
-
-        <div className="flex justify-between text-md text-[#5B5B5B] mt-2">
-          <span className="text-amber-600">Dress Code</span>
-          <span className="font-semibold">Casual, comfortable and light</span>
-        </div>
+      <div className="mt-6 space-y-3 sm:space-y-4 text-gray-700">
+        {[
+          ["Destination", "Zurich, Switzerland"],
+          ["Departure", "Main Square New City"],
+          ["Departure Time", "Approximately 08:10 AM"],
+          ["Return Time", "Approximately 07:20 PM"],
+          ["Dress Code", "Casual, comfortable and light"],
+        ].map(([label, value], i) => (
+          <div
+            key={i}
+            className="flex justify-between flex-wrap text-sm sm:text-base md:text-lg"
+          >
+            <span className="text-amber-600 font-medium">{label}</span>
+            <span className="font-semibold">{value}</span>
+          </div>
+        ))}
       </div>
 
       {/* Included and Not Included Section */}
-      <div className="mt-6">
+      <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {/* Not Included */}
         <div>
-          <h3 className="text-lg font-semibold text-[#0C1C8C]">Not Included</h3>
-          <ul className="mt-2 text-sm text-[#5B5B5B]">
+          <h3 className="text-lg sm:text-xl font-semibold text-[#0C1C8C] mb-2">
+            Not Included
+          </h3>
+          <ul className="space-y-2 text-sm sm:text-base text-[#5B5B5B]">
             <li className="flex items-center">
-              <XCircle className="mr-2 text-[#D64E36]" /> Gallery Ticket
+              <XCircle className="mr-2 text-[#D64E36] w-4 h-4 sm:w-5 sm:h-5" /> Gallery Ticket
             </li>
             <li className="flex items-center">
-              <XCircle className="mr-2 text-[#D64E36]" /> Lunch
+              <XCircle className="mr-2 text-[#D64E36] w-4 h-4 sm:w-5 sm:h-5" /> Lunch
             </li>
           </ul>
         </div>
 
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold text-[#0C1C8C]">Included</h3>
-          <ul className="mt-2 text-sm text-[#5B5B5B]">
-            <li className="flex items-center">
-              <CheckCircle className="mr-2 text-[#63D69F]" /> 5 Star
-              Accommodation
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="mr-2 text-[#63D69F]" /> Airport Transfer
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="mr-2 text-[#63D69F]" /> Breakfast
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="mr-2 text-[#63D69F]" /> Personal Guide
-            </li>
+        {/* Included */}
+        <div>
+          <h3 className="text-lg sm:text-xl font-semibold text-[#0C1C8C] mb-2">
+            Included
+          </h3>
+          <ul className="space-y-2 text-sm sm:text-base text-[#5B5B5B]">
+            {[
+              "5 Star Accommodation",
+              "Airport Transfer",
+              "Breakfast",
+              "Personal Guide",
+            ].map((item, i) => (
+              <li key={i} className="flex items-center">
+                <CheckCircle className="mr-2 text-[#63D69F] w-4 h-4 sm:w-5 sm:h-5" /> {item}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-      <div>
-        <div className="flex justify-between items-center mt-5 mb-5">
-          <h1 className="text-3xl font-bold text-[#5660ae]">
-            From our gallery
-          </h1>
-        </div>
-        <p className="text-gray-600 mb-6">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit ex
-          similique dolorem fugit harum deleniti, voluptates eos eligendi
-          nesciunt recusandae reprehenderit ut incidunt quidem, laborum in
-          maxime. Similique blanditiis culpa harum ab perferendis, quidem
-          explicabo, quia excepturi ipsa porro quae numquam dolore tempora
-          veritatis! Libero necessitatibus nostrum non repellendus veniam.
+
+      {/* Gallery Section */}
+      <div className="mt-10">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#5660ae] mb-3">
+          From our gallery
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+          Explore the charm and beauty of Switzerland through these exclusive snapshots
+          from our travelers’ experiences — every frame tells a story.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {galleryImages.map((src, i) => (
             <div key={i} className="overflow-hidden rounded-xl">
               <img
                 src={src}
                 alt={`Gallery ${i + 1}`}
-                className="w-full h-50 object-cover transform transition-transform duration-500 hover:scale-110"
+                className="w-full h-52 sm:h-56 md:h-64 object-cover transform transition-transform duration-500 hover:scale-110"
               />
             </div>
           ))}

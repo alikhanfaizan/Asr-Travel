@@ -10,12 +10,12 @@ import Navbar from './components/Navbar'
 const App = () => {
   return (
     <div className='flex flex-col min-h-screen'>
-      <Navbar/>
-      <main className="flex-1 pt-20">
+      {/* <Navbar/> */}
+      <main >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/services-landscape" element={<ServicesLandscape />} />
+          <Route path="/services/landscape" element={<ServicesLandscape />} />
           <Route path="/upcoming-package" element={<UpcomingPackage />} />
         </Routes>
       </main>

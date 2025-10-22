@@ -133,7 +133,7 @@ const NavItem = ({
 };
 
 // Global Reusable Navbar Component
-const Navbar = () => {
+const Navbar2 = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -307,4 +307,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar2;

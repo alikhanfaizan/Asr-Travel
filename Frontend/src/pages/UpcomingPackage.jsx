@@ -1,17 +1,26 @@
 import React from 'react'
 import Sorting from '../components/Sorting'
 import bg3 from '../assets/bg3.jpg';
+import Navbar from '../components/Navbar';
 
 const UpcomingPackage = () => {
   return (
     <div>
-      <section
-              className="relative w-full h-[90vh] flex items-center justify-center bg-cover bg-center"
-              style={{ backgroundImage: `url(${bg3})` }}
-            >
+      <div className="xl:min-h-screen bg-white relative overflow-hidden">
+        {/* Navbar */}
+        <Navbar />
+
+        {/* Background Image */}
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+          <img
+            src={bg3}
+            alt="Decorative background"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
               
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
-              <div className="relative text-center text-white px-4">
+              {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div> */}
+              <div className="relative z-20 flex flex-col items-center justify-center text-center text-white min-h-[60vh] px-4">
                 <p className="text-sm tracking-[4px] uppercase font-semibold mb-2">
                   Search Tour
                 </p>
@@ -19,7 +28,7 @@ const UpcomingPackage = () => {
                   Travel With Us
                 </h1>
               </div>
-            </section>
+      </div>
       <Sorting/>
     </div>
   )
