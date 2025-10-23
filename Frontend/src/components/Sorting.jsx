@@ -51,6 +51,28 @@ const tripsData = [
     description:
       "Modern City with Cultural Diversity and stunning skyline offering world-class dining and entertainment.",
   },
+  {
+    id: 5,
+    image: i1,
+    title: "Switzerland",
+    date: "June 15 - June 25",
+    people: 8,
+    price: "$899",
+    rating: 4.9,
+    description:
+      "The Land of the Alps and Scenic Beauty that will take your breath away with stunning mountain views.",
+  },
+  {
+    id: 6,
+    image: i2,
+    title: "Berlin",
+    date: "July 10 - July 18",
+    people: 12,
+    price: "$650",
+    rating: 4.8,
+    description:
+      "The Heart of European Culture and modern architecture with rich historical heritage and vibrant atmosphere.",
+  },
 ];
 
 const Sorting = () => {

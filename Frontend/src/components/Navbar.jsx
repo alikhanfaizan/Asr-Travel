@@ -17,12 +17,19 @@ const NavItem = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleClick = (e) => {
-    if (hasDropdown) {
+    if (hasDropdown && isMobile) {
+      e.preventDefault();
+      setIsDropdownOpen(!isDropdownOpen);
+    } else if (hasDropdown && !isMobile) {
       e.preventDefault();
       setIsDropdownOpen(!isDropdownOpen);
     } else {
-      if (onClick) onClick();
-      if (isMobile && onMobileMenuClose) onMobileMenuClose();
+      if (onClick) {
+        onClick();
+      }
+      if (isMobile && onMobileMenuClose) {
+        onMobileMenuClose();
+      }
     }
   };
 
@@ -43,7 +50,7 @@ const NavItem = ({
           className={`absolute bottom-0 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full ${
             isActive ? "hidden" : ""
           }`}
-          style={{ backgroundColor: "#fff" }}
+          style={{ backgroundColor: "#DF6951" }}
         />
       )}
 
@@ -148,7 +155,6 @@ const Navbar = () => {
     } else {
       document.body.style.overflow = "unset";
     }
-
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -188,7 +194,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-50 max-w-7xl mx-auto w-full">
-        {/* Logo */}
+        {/* Logo - Left Side */}
         <div className="flex-shrink-0">
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <img
@@ -199,7 +205,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation Items - Center */}
         <div className="hidden lg:flex items-center justify-center space-x-8 xl:space-x-12 flex-1">
           {navItems.map((item) => (
             <NavItem
@@ -215,7 +221,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop Button */}
+        {/* Desktop Get In Touch Button - Right Side */}
         <div className="hidden sm:block flex-shrink-0">
           <button
             onClick={handleContactClick}
@@ -256,7 +262,7 @@ const Navbar = () => {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Mobile Header */}
+        {/* Mobile Menu Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <Link to="/" onClick={closeMobileMenu}>
             <img
@@ -274,7 +280,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Nav Links */}
+        {/* Mobile Navigation Items */}
         <div className="py-4 overflow-y-auto max-h-[calc(100vh-180px)]">
           {navItems.map((item) => (
             <NavItem
@@ -292,7 +298,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Contact Button */}
+        {/* Mobile Get In Touch Button */}
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-50 border-t border-gray-200">
           <button
             onClick={handleContactClick}

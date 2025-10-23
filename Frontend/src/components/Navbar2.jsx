@@ -2,7 +2,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-// Navigation Item Component
+// ---------------- NavItem Component ----------------
 const NavItem = ({
   href,
   children,
@@ -37,32 +37,32 @@ const NavItem = ({
         />
       )}
 
-      {/* Desktop hover underline for non-active items */}
+      {/* Desktop underline hover */}
       {!isMobile && (
-        <div
-          className={`absolute bottom-0 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full ${
-            isActive ? "hidden" : ""
-          }`}
-          style={{ backgroundColor: "#fff" }}
-        />
-      )}
-
-      {/* Desktop active state underline */}
-      {!isMobile && isActive && (
-        <div
-          className="absolute bottom-0 left-0 w-full h-0.5 rounded-full transition-all duration-300"
-          style={{ backgroundColor: "#DF6951" }}
-        />
+        <>
+          {!isActive && (
+            <div
+              className="absolute bottom-0 left-0 w-0 h-0.5 rounded-full bg-white transition-all duration-300 group-hover:w-full"
+            />
+          )}
+          {isActive && (
+            <div
+              className="absolute bottom-0 left-0 w-full h-0.5 rounded-full transition-all duration-300"
+              style={{ backgroundColor: "#DF6951" }}
+            />
+          )}
+        </>
       )}
     </>
   );
 
+  // ✅ WHITE text for desktop, default mobile color scheme remains gray
   const baseClasses = isMobile
     ? `block py-3 px-4 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 flex items-center justify-between font-poppins ${
         isActive ? "text-gray-900 bg-gray-50" : ""
       }`
-    : `relative text-gray-600 hover:text-gray-800 transition-all duration-300 pb-2 flex items-center gap-1 group font-poppins ${
-        isActive ? "text-gray-800" : ""
+    : `relative text-white  transition-all duration-300 pb-2 flex items-center gap-1 group font-poppins ${
+        isActive ? "text-[#DF6951]" : ""
       }`;
 
   const dropdownContainer = isMobile ? (
@@ -96,7 +96,7 @@ const NavItem = ({
             <Link
               key={index}
               to={`/services/${item.toLowerCase().replace(/\s+/g, "-")}`}
-              className="block px-4 py-3 text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors font-medium"
+              className="block px-4 py-3 text-gray-700 hover:text-[#DF6951] hover:bg-gray-50 transition-colors font-medium"
               onClick={() => setIsDropdownOpen(false)}
             >
               {item}
@@ -132,26 +132,17 @@ const NavItem = ({
   );
 };
 
-// Global Reusable Navbar Component
-const Navbar2 = () => {
+// ---------------- Navbar Component ----------------
+const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  useEffect(() => setIsMobileMenuOpen(false), [location.pathname]);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
+    return () => (document.body.style.overflow = "unset");
   }, [isMobileMenuOpen]);
 
   const getCurrentPage = () => {
@@ -181,13 +172,10 @@ const Navbar2 = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <>
-      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-50 max-w-7xl mx-auto w-full">
+      {/* Transparent Navbar with white text for desktop */}
+      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-50 max-w-7xl mx-auto w-full bg-transparent">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
@@ -219,7 +207,7 @@ const Navbar2 = () => {
         <div className="hidden sm:block flex-shrink-0">
           <button
             onClick={handleContactClick}
-            className="px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-white font-poppins text-sm lg:text-base font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 cursor-pointer hover:shadow-[#DA6951]"
+            className="px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-white font-poppins text-sm lg:text-base font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 cursor-pointer "
             style={{ backgroundColor: "#DF6951" }}
           >
             Get In Touch
@@ -230,7 +218,7 @@ const Navbar2 = () => {
         <div className="lg:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-600 hover:text-gray-800 p-2 transition-colors"
+            className="text-white hover:text-gray-800 p-2 transition-colors"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
@@ -246,7 +234,7 @@ const Navbar2 = () => {
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={closeMobileMenu}
+          onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
@@ -256,9 +244,9 @@ const Navbar2 = () => {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Mobile Header */}
+        {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <Link to="/" onClick={closeMobileMenu}>
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <img
               src="https://res.cloudinary.com/dez8z7xbp/image/upload/v1756232310/logo_1_ousg0a.svg"
               alt="Logo"
@@ -266,7 +254,7 @@ const Navbar2 = () => {
             />
           </Link>
           <button
-            onClick={closeMobileMenu}
+            onClick={() => setIsMobileMenuOpen(false)}
             className="text-gray-600 hover:text-gray-800 p-2 transition-colors"
             aria-label="Close mobile menu"
           >
@@ -285,7 +273,7 @@ const Navbar2 = () => {
               dropdownItems={item.dropdownItems}
               isInternal={item.isInternal}
               isMobile={true}
-              onMobileMenuClose={closeMobileMenu}
+              onMobileMenuClose={() => setIsMobileMenuOpen(false)}
             >
               {item.name}
             </NavItem>
@@ -307,4 +295,4 @@ const Navbar2 = () => {
   );
 };
 
-export default Navbar2;
+export default Navbar;

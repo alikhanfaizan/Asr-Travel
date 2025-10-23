@@ -1,16 +1,16 @@
 import React from 'react'
 import Landscpae from '../components/Landscape'
 import bg1 from '../assets/bg1.jpg';
-import Navbar from '../components/Navbar';
+import Navbar2 from '../components/Navbar2';
 
 
 const ServicesLandscape = () => {
   return (
     
     <div>
-      <div className="xl:min-h-screen bg-white relative overflow-hidden">
+      <div className="xl:min-h-screen relative overflow-hidden">
         {/* Navbar */}
-        <Navbar />
+        <Navbar2 />
 
         {/* Background Image */}
         <div className="absolute top-0 left-0 w-full h-full z-0">
