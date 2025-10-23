@@ -1,20 +1,24 @@
-import {
-  Linkedin,
-  MessageCircle,
-  Infinity,
-  TwitterIcon,
-} from "lucide-react";
-
+import { Linkedin, MessageCircle, Infinity, TwitterIcon } from "lucide-react";
+import footerbg from "../assets/footerbg.jpg";
 export default function Footer() {
   return (
-    <section className="bg-white border-t border-gray-200 ">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+    <section
+      className="relative bg-cover bg-center bg-no-repeat border-t border-gray-200"
+      style={{
+        backgroundImage: `url(${footerbg})`, // footerbg should be the imported image
+      }}
+    >
+      {/* Overlay for better contrast */}
+      <div className="absolute inset-0 bg-white/85"></div>
+
+      {/* Footer Content */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
         {/* Left Section */}
         <div>
           <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-1">
-            Travel<span className="text-orange-500 text-3xl -mt-1">↗</span>
+            Travel
           </h2>
-          <p className="mt-4 text-gray-600 leading-relaxed">
+          <p className="mt-4 text-gray-700 leading-relaxed">
             Travel helps companies manage payments easily.
           </p>
 
@@ -29,7 +33,7 @@ export default function Footer() {
         {/* Company Section */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Company</h3>
-          <ul className="space-y-2 text-gray-600">
+          <ul className="space-y-2 text-gray-700">
             <li>About Us</li>
             <li>Careers</li>
             <li>Blog</li>
@@ -39,8 +43,10 @@ export default function Footer() {
 
         {/* Destinations Section */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Destinations</h3>
-          <ul className="space-y-2 text-gray-600">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Destinations
+          </h3>
+          <ul className="space-y-2 text-gray-700">
             <li>Maldives</li>
             <li>Los Angeles</li>
             <li>Las Vegas</li>
@@ -63,13 +69,14 @@ export default function Footer() {
               Subscribe
             </button>
           </div>
-          <p className="mt-3 text-sm text-gray-500">
+          <p className="mt-3 text-sm text-gray-600">
             * We'll send you weekly updates for your better tour packages.
           </p>
         </div>
       </div>
 
-      <div className="border-t border-gray-200 py-6 text-center text-gray-600 text-sm">
+      {/* Bottom Bar */}
+      <div className="relative border-t border-gray-200 py-6 text-center text-gray-700 text-sm bg-white/70">
         Copyright © Xpro 2025. All Rights Reserved.
       </div>
     </section>

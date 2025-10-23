@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Calendar, ArrowUp, ArrowDown, Edit, Users, Star } from "lucide-react";
 import i1 from "../assets/img1.png";
 import i2 from "../assets/img2.png";
@@ -68,7 +68,7 @@ const tripsData = [
     title: "Berlin",
     date: "July 10 - July 18",
     people: 12,
-    price: "$650",
+    price: "$3000",
     rating: 4.8,
     description:
       "The Heart of European Culture and modern architecture with rich historical heritage and vibrant atmosphere.",
@@ -76,56 +76,64 @@ const tripsData = [
 ];
 
 const Sorting = () => {
-  const [trips, setTrips] = useState(tripsData);
   const [searchTerm, setSearchTerm] = useState("");
+  const [destination, setDestination] = useState("");
+  const [month, setMonth] = useState("");
+  const [price, setPrice] = useState(3596);
   const [sortBy, setSortBy] = useState(null);
 
-  const handleSort = (criteria) => {
-    let sortedTrips;
-    if (criteria === "date") {
-      sortedTrips = [...trips].sort(
+  // Filtering + Sorting logic combined using useMemo for performance
+  const filteredAndSortedTrips = useMemo(() => {
+    let filtered = tripsData.filter((trip) => {
+      const tripPrice = parseFloat(trip.price.replace("$", ""));
+      const tripMonth = trip.date.split(" ")[0].toLowerCase();
+
+      return (
+        (trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          trip.description.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (destination
+          ? trip.title.toLowerCase().includes(destination.toLowerCase())
+          : true) &&
+        (month ? tripMonth.includes(month.toLowerCase()) : true) &&
+        tripPrice <= price
+      );
+    });
+
+    // Apply sorting on filtered trips
+    if (sortBy === "date") {
+      filtered.sort(
         (a, b) =>
           new Date(a.date.split(" - ")[0]) - new Date(b.date.split(" - ")[0])
       );
-    } else if (criteria === "priceLowToHigh") {
-      sortedTrips = [...trips].sort(
+    } else if (sortBy === "priceLowToHigh") {
+      filtered.sort(
         (a, b) =>
           parseFloat(a.price.replace("$", "")) -
           parseFloat(b.price.replace("$", ""))
       );
-    } else if (criteria === "priceHighToLow") {
-      sortedTrips = [...trips].sort(
+    } else if (sortBy === "priceHighToLow") {
+      filtered.sort(
         (a, b) =>
           parseFloat(b.price.replace("$", "")) -
           parseFloat(a.price.replace("$", ""))
       );
-    } else if (criteria === "name") {
-      sortedTrips = [...trips].sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
+    } else if (sortBy === "name") {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
     }
-    setTrips(sortedTrips);
-    setSortBy(criteria);
-  };
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredTrips = trips.filter(
-    (trip) =>
-      trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trip.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    return filtered;
+  }, [searchTerm, destination, month, price, sortBy]);
 
   return (
     <div className="min-h-screen bg-[#fefefe] px-4 sm:px-8 md:px-12 lg:px-24 py-8">
       {/* Sorting Bar */}
       <div className="bg-gray-100 p-4 flex flex-wrap justify-center sm:justify-between gap-3 rounded-lg mt-4 shadow-sm">
         <button
-          onClick={() => handleSort("date")}
+          onClick={() => setSortBy("date")}
           className={`flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-md transition ${
-            sortBy === "date" ? "text-[#e85a34]" : "text-gray-700 hover:text-[#e85a34]"
+            sortBy === "date"
+              ? "text-[#e85a34]"
+              : "text-gray-700 hover:text-[#e85a34]"
           }`}
         >
           <Calendar className="mr-2" size={16} />
@@ -133,7 +141,7 @@ const Sorting = () => {
         </button>
 
         <button
-          onClick={() => handleSort("priceLowToHigh")}
+          onClick={() => setSortBy("priceLowToHigh")}
           className={`flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-md transition ${
             sortBy === "priceLowToHigh"
               ? "text-[#e85a34]"
@@ -145,7 +153,7 @@ const Sorting = () => {
         </button>
 
         <button
-          onClick={() => handleSort("priceHighToLow")}
+          onClick={() => setSortBy("priceHighToLow")}
           className={`flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-md transition ${
             sortBy === "priceHighToLow"
               ? "text-[#e85a34]"
@@ -157,9 +165,11 @@ const Sorting = () => {
         </button>
 
         <button
-          onClick={() => handleSort("name")}
+          onClick={() => setSortBy("name")}
           className={`flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-md transition ${
-            sortBy === "name" ? "text-[#e85a34]" : "text-gray-700 hover:text-[#e85a34]"
+            sortBy === "name"
+              ? "text-[#e85a34]"
+              : "text-gray-700 hover:text-[#e85a34]"
           }`}
         >
           <Edit className="mr-2" size={16} />
@@ -171,7 +181,7 @@ const Sorting = () => {
       <div className="flex flex-col lg:flex-row gap-8 mt-10">
         {/* Cards Section */}
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredTrips.map((trip) => (
+          {filteredAndSortedTrips.map((trip) => (
             <div
               key={trip.id}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
@@ -215,6 +225,11 @@ const Sorting = () => {
               </div>
             </div>
           ))}
+          {filteredAndSortedTrips.length === 0 && (
+            <p className="text-center text-gray-500 col-span-full">
+              No trips found matching your criteria.
+            </p>
+          )}
         </div>
 
         {/* Sidebar Section */}
@@ -223,28 +238,34 @@ const Sorting = () => {
             Plan Your Trip
           </h2>
           <p className="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">
-            Ex optio sequi et quos praesentium in nostrum labore nam rerum iusto aut magni nesciunt? 
-            Quo quidem neque iste expedita est dolo.
+            Find your dream vacation by searching for destinations, adjusting
+            your price range, or filtering by travel month.
           </p>
 
+          {/* Filters */}
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by name or keyword"
             className="w-full mb-2 p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#e85a34]"
             value={searchTerm}
-            onChange={handleSearch}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <input
             type="text"
             placeholder="Where To"
             className="w-full mb-2 p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#e85a34]"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
           />
           <input
             type="text"
             placeholder="Date (e.g., June, July)"
             className="w-full mb-4 p-2 border rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#e85a34]"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
           />
 
+          {/* Price Filter */}
           <div className="mb-4">
             <label className="block text-xs font-medium text-gray-700 mb-1">
               Filter By Price
@@ -253,9 +274,11 @@ const Sorting = () => {
               type="range"
               min="12"
               max="3596"
+              value={price}
+              onChange={(e) => setPrice(Number(e.target.value))}
               className="w-full accent-[#e85a34]"
             />
-            <p className="text-xs text-gray-600 mt-1">Price: $12 - $3596</p>
+            <p className="text-xs text-gray-600 mt-1">Up to: ${price}</p>
           </div>
 
           <button className="w-full bg-[#e85a34] text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-[#d24d2f] transition">
